@@ -13,7 +13,7 @@ from uncertainties import unumpy, umath
 #     return km
 
 
-def _radius(theta):
+def radius(theta):
     r0 = 6356.752  # WGS84
     r1 = 6378.137
     return sqrt(((r1**2 * cos(theta))**2 + (r0**2 * sin(theta))**2) /
@@ -34,7 +34,7 @@ def _spherical2cart(pos):
 def distance(pos1, pos2):
     x1, y1, z1 = _spherical2cart(pos1)
     x2, y2, z2 = _spherical2cart(pos2)
-    return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 - (z2 - z1) ** 2)
+    return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)
 
 
 def dynecm2nm(x):
@@ -62,7 +62,7 @@ def tensor_sum(tensors):
 
 def row2mt(data):
     date = data[0]
-    pos = (_radius(data[1]), data[1], data[2])  # r, lat, lon
+    pos = (radius(data[1]), data[1], data[2])  # r, lat, lon
     depth = data[3]
     exp = data[8]
     mt = np.array([[data[9], data[15], data[17]],

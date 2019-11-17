@@ -10,7 +10,8 @@ from matplotlib.patches import Polygon
 
 # Extracting Alaskan earthquakes
 df = pd.read_pickle("./gcmt_all_earthquakes.pkl")
-df = df[50 < df.lat < 75]
+df = df[df.lat > 50]
+df = df[df.lat < 75]
 df = df[df.lon < -130]
 
 mat = df.to_numpy()
